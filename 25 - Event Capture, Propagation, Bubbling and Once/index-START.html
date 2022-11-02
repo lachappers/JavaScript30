@@ -42,6 +42,21 @@
 
 <button></button>
 <script>
+  // bubbling - returns what you've clicked on but also the tree all the way up to the top of the doc and trigger on a click on all elements along the way
+  const divs = document.querySelectorAll('div');
+
+  function logText(e) {
+    console.log(this.classList.value);
+
+  //  e.stopPropagation();     // stop bubbling this event up - i clicked the one I wanted
+    // console.log(this);
+  }
+
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, // adding capture: true prevents click from being run on bubble up and only runs on capture down - returns one two three. capture: false returns three two one
+    once: true //listens for a click once then "unbinds" so it won't run again - e.g. if you only want someone to be able to click a button once
+  }));   
 
 </script>
 </body>
